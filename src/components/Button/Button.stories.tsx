@@ -1,37 +1,44 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Button } from './Button';
+import type { Meta, StoryFn } from '@storybook/react';
+import Button from './Button';
+import type { ButtonProps } from './Button';
 
-const meta: Meta<typeof Button> = {
+export default {
     title: 'Components/Button',
     component: Button,
     tags: ['autodocs'],
+    parameters: {
+        docs: {
+            description: {
+                component: '这是按钮组件，用于展示不同状态、尺寸和变体的按钮。',
+            },
+        },
+    },
     argTypes: {
-        variant: { control: 'select', options: ['primary', 'secondary', 'outline'] },
-        size: { control: 'select', options: ['sm', 'md', 'lg'] },
-        fullWidth: { control: 'boolean' },
+        variant: {
+            control: { type: 'select', options: ['primary', 'secondary', 'success', 'danger', 'warning', 'info'] },
+            description: '按钮的样式变体',
+        },
+        size: {
+            control: { type: 'select', options: ['small', 'medium', 'large'] },
+            description: '按钮的尺寸',
+        },
+        disabled: { control: 'boolean', description: '是否禁用按钮' },
+        children: { control: 'text', description: '按钮显示的文本或元素' },
     },
+} as Meta<ButtonProps>;
+
+const Template: StoryFn<ButtonProps> = (args) => <Button {...args} />;
+
+export const Primary = Template.bind({});
+Primary.args = {
+    children: 'Click Me',
+    variant: 'primary',
+    size: 'medium',
 };
 
-export default meta;
-type Story = StoryObj<typeof Button>;
-
-export const Primary: Story = {
-    args: {
-        children: 'Click Me',
-        variant: 'primary',
-    },
-};
-
-export const Secondary: Story = {
-    args: {
-        children: 'Secondary',
-        variant: 'secondary',
-    },
-};
-
-export const Outline: Story = {
-    args: {
-        children: 'Outline',
-        variant: 'outline',
-    },
+export const Secondary = Template.bind({});
+Secondary.args = {
+    children: 'Secondary Button',
+    variant: 'secondary',
+    size: 'medium',
 };

@@ -1,39 +1,48 @@
-import { type HTMLAttributes, forwardRef } from 'react';
+import React from 'react';
+import './Button.scss';
 
-export type ButtonProps = {
-    variant?: 'primary' | 'secondary' | 'outline';
-    size?: 'sm' | 'md' | 'lg';
-    fullWidth?: boolean;
-} & HTMLAttributes<HTMLButtonElement>;
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+    /**
+     * 按钮变体
+     */
+    variant?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info';
+    /**
+     * 按钮大小
+     */
+    size?: 'small' | 'medium' | 'large';
+    /**
+     * 是否禁用
+     */
+    disabled?: boolean;
+    /**
+     * 子元素
+     */
+    children: React.ReactNode;
+    /**
+     * 自定义类名
+     */
+    className?: string;
+}
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-    ({ variant = 'primary', size = 'md', fullWidth, className = '', ...props }, ref) => {
-        const baseClasses = 'font-medium rounded focus:outline-none focus:ring-2 transition-colors';
-        const variantClasses = {
-            primary: 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500',
-            secondary: 'bg-gray-600 text-white hover:bg-gray-700 focus:ring-gray-500',
-            outline: 'border border-gray-400 text-gray-700 hover:bg-gray-100 focus:ring-gray-300',
-        };
-        const sizeClasses = {
-            sm: 'text-sm px-3 py-1',
-            md: 'text-base px-4 py-2',
-            lg: 'text-lg px-6 py-3',
-        };
+const Button: React.FC<ButtonProps> = ({
+    children,
+    variant = 'primary',
+    size = 'medium',
+    disabled = false,
+    className = '',
+    ...props
+}) => {
+    const buttonClass = `btn btn-${variant} btn-${size} ${disabled ? 'btn-disabled' : ''} ${className}`;
 
-        return (
-            <button
-                ref={ref}
-                className={`
-                    ${baseClasses}
-                    ${variantClasses[variant]}
-                    ${sizeClasses[size]}
-                    ${fullWidth ? 'w-full' : ''}
-                    ${className}
-                `}
-                {...props}
-            />
-        );
-    }
-);
+    return (
+        <button
+            className={buttonClass}
+            disabled={disabled}
+            {...props}
+        >
+            {children}
+        </button>
+    );
+};
 
-Button.displayName = 'Button';
+export default Button;

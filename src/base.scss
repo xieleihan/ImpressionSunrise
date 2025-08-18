@@ -1,0 +1,84 @@
+// 颜色变量，基于莫奈的《日出·印象》配色方案
+// 天空蓝系
+$monet-sky-blue-1: #a3c4f3;
+$monet-sky-blue-2: #c3d9ff;
+$monet-sky-blue-3: #7aa9e9;
+$monet-sky-blue-4: #d0e6ff;
+
+// 水面蓝系
+$monet-water-blue-1: #78b6c7;
+$monet-water-blue-2: #91c8d6;
+$monet-water-blue-3: #b3d8e7;
+$monet-water-blue-4: #cfeaf4;
+
+// 花朵粉系
+$monet-petal-pink-1: #f7c6c7;
+$monet-petal-pink-2: #fce4e4;
+$monet-petal-pink-3: #f9b0b2;
+$monet-petal-pink-4: #ffd6da;
+
+// 草叶绿系
+$monet-grass-green-1: #a8d5ba;
+$monet-grass-green-2: #d0e8d4;
+$monet-grass-green-3: #6ca18f;
+$monet-grass-green-4: #b8e0d2;
+
+// 莲叶青系
+$monet-leaf-green-1: #6ca18f;
+$monet-leaf-green-2: #558b74;
+$monet-leaf-green-3: #4b7f67;
+$monet-leaf-green-4: #88c0a3;
+
+// 日落橙 / 暖阳黄系
+$monet-sunset-orange-1: #f5b96f;
+$monet-sunset-orange-2: #fcd9a6;
+$monet-warm-yellow-1: #fbe8a6;
+$monet-warm-yellow-2: #ffeecf;
+
+// 云雾灰系
+$monet-cloud-gray-1: #cfd8dc;
+$monet-cloud-gray-2: #e0e6ea;
+$monet-mist-white-1: #f7f8f9;
+$monet-mist-white-2: #fafafa;
+
+// 紫藤 / 淡紫系
+$monet-wisteria-purple-1: #b19cd9;
+$monet-wisteria-purple-2: #d9c7f5;
+$monet-lavender-1: #c5b3e3;
+$monet-lavender-2: #e2d9f7;
+
+// 暗调 / 深水色系
+$monet-deep-water-1: #3b6978;
+$monet-deep-water-2: #5a8f91;
+$monet-deep-leaf-1: #2e5d4c;
+$monet-deep-leaf-2: #48725c;
+
+// 花朵暖红系
+$monet-flower-red-1: #f06c9b;
+$monet-flower-red-2: #f49ca2;
+$monet-flower-red-3: #f7a3b2;
+
+// 其他属性
+// 间距变量
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+
+// 边框半径
+$border-radius-sm: 2px;
+$border-radius-md: 4px;
+$border-radius-lg: 8px;
+
+// 字体大小
+$font-size-sm: 12px;
+$font-size-md: 14px;
+$font-size-lg: 16px;
+$font-size-xl: 18px;
+$font-size-xxl: 20px;
+
+// 阴影
+$box-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$box-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+$box-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);

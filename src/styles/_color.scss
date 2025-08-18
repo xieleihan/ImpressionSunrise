@@ -1,0 +1,48 @@
+@use '../base' as base;
+@use 'sass:color';
+
+@function readable-text($bg) {
+    @if color.channel($bg, "lightness", $space: hsl)>90% {
+        @return #000; // 背景亮时用黑色
+    }
+
+    @else {
+        @return #fff; // 背景暗时用白色
+    } 
+}
+
+// ---------- Primary ----------
+$btn-primary-bg: base.$monet-sky-blue-3;
+$btn-primary-color: readable-text($btn-primary-bg);
+$btn-primary-hover-bg: color.adjust($btn-primary-bg, $lightness: -15%);
+$btn-primary-active-bg: color.adjust($btn-primary-bg, $lightness: -25%);
+
+// ---------- Secondary ----------
+$btn-secondary-bg: base.$monet-wisteria-purple-1;
+$btn-secondary-color: readable-text($btn-secondary-bg);
+$btn-secondary-hover-bg: color.adjust($btn-secondary-bg, $lightness: -15%);
+$btn-secondary-active-bg: color.adjust($btn-secondary-bg, $lightness: -25%);
+
+// ---------- Success ----------
+$btn-success-bg: base.$monet-grass-green-3;
+$btn-success-color: readable-text($btn-success-bg);
+$btn-success-hover-bg: color.adjust($btn-success-bg, $lightness: -15%);
+$btn-success-active-bg: color.adjust($btn-success-bg, $lightness: -25%);
+
+// ---------- Danger ----------
+$btn-danger-bg: base.$monet-flower-red-1;
+$btn-danger-color: readable-text($btn-danger-bg);
+$btn-danger-hover-bg: color.adjust($btn-danger-bg, $lightness: -15%);
+$btn-danger-active-bg: color.adjust($btn-danger-bg, $lightness: -25%);
+
+// ---------- Warning ----------
+$btn-warning-bg: base.$monet-sunset-orange-2;
+$btn-warning-color: readable-text($btn-warning-bg);
+$btn-warning-hover-bg: color.adjust($btn-warning-bg, $lightness: -10%);
+$btn-warning-active-bg: color.adjust($btn-warning-bg, $lightness: -15%);
+
+// ---------- Info ----------
+$btn-info-bg: base.$monet-mist-white-1;
+$btn-info-color: readable-text($btn-info-bg);
+$btn-info-hover-bg: color.adjust($btn-info-bg, $lightness: -15%);
+$btn-info-active-bg: color.adjust($btn-info-bg, $lightness: -25%);

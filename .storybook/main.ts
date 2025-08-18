@@ -1,15 +1,14 @@
 import type { StorybookConfig } from '@storybook/react-vite';
 
 const config: StorybookConfig = {
-  "core": { "builder": "@storybook/builder-vite" },
   "stories": [
     "../src/**/*.mdx",
     "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"
   ],
   "addons": [
+    '@storybook/addon-docs',
+    "@storybook/addon-essentials",
     "@chromatic-com/storybook",
-    "@storybook/addon-docs",
-    "@storybook/addon-onboarding",
     "@storybook/addon-a11y",
     "@storybook/addon-vitest",
   ],
@@ -18,6 +17,12 @@ const config: StorybookConfig = {
     "options": {}
   },
   viteFinal: async (config) => {
+    // 支持 SCSS
+    config.css = config.css || {};
+    config.css.preprocessorOptions = config.css.preprocessorOptions || {};
+    config.css.preprocessorOptions.scss = {
+      additionalData: '',
+    };
     return config;
   },
 };

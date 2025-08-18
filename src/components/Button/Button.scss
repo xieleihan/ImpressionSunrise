@@ -1,0 +1,148 @@
+@use '../../base' as base;
+@use '../../styles/color' as wcagcolor;
+@use 'sass:color';
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+    border-radius: base.$border-radius-md;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+    text-decoration: none;
+    user-select: none;
+    white-space: nowrap;
+
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+    }
+
+    &-disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    // Primary
+    &-primary {
+        background-color: base.$monet-sky-blue-3;
+        color: wcagcolor.$btn-primary-color;
+        border-color: base.$monet-sky-blue-3;
+
+        &:hover:not(.btn-disabled) {
+            background-color: color.adjust(base.$monet-sky-blue-3, $lightness: -10%);
+            border-color: color.adjust(base.$monet-sky-blue-3, $lightness: -10%);
+        }
+
+        &:active:not(.btn-disabled) {
+            background-color: color.adjust(base.$monet-sky-blue-3, $lightness: -15%);
+            border-color: color.adjust(base.$monet-sky-blue-3, $lightness: -15%);
+        }
+    }
+
+    // Secondary
+    &-secondary {
+        background-color: base.$monet-wisteria-purple-1;
+        color: wcagcolor.$btn-secondary-color;
+        border-color: base.$monet-wisteria-purple-1;
+
+        &:hover:not(.btn-disabled) {
+            background-color: color.adjust(base.$monet-wisteria-purple-1, $lightness: -10%);
+            border-color: color.adjust(base.$monet-wisteria-purple-1, $lightness: -10%);
+        }
+
+        &:active:not(.btn-disabled) {
+            background-color: color.adjust(base.$monet-wisteria-purple-1, $lightness: -15%);
+            border-color: color.adjust(base.$monet-wisteria-purple-1, $lightness: -15%);
+        }
+    }
+
+    // Success
+    &-success {
+        background-color: base.$monet-grass-green-3;
+        color: wcagcolor.$btn-success-color;
+        border-color: base.$monet-grass-green-3;
+
+        &:hover:not(.btn-disabled) {
+            background-color: color.adjust(base.$monet-grass-green-3, $lightness: -10%);
+            border-color: color.adjust(base.$monet-grass-green-3, $lightness: -10%);
+        }
+
+        &:active:not(.btn-disabled) {
+            background-color: color.adjust(base.$monet-grass-green-3, $lightness: -15%);
+            border-color: color.adjust(base.$monet-grass-green-3, $lightness: -15%);
+        }
+    }
+
+    // Danger
+    &-danger {
+        background-color: base.$monet-flower-red-1;
+        color: wcagcolor.$btn-danger-color;
+        border-color: base.$monet-flower-red-1;
+
+        &:hover:not(.btn-disabled) {
+            background-color: color.adjust(base.$monet-flower-red-1, $lightness: -10%);
+            border-color: color.adjust(base.$monet-flower-red-1, $lightness: -10%);
+        }
+
+        &:active:not(.btn-disabled) {
+            background-color: color.adjust(base.$monet-flower-red-1, $lightness: -15%);
+            border-color: color.adjust(base.$monet-flower-red-1, $lightness: -15%);
+        }
+    }
+
+    // Warning
+    &-warning {
+        background-color: base.$monet-sunset-orange-2;
+        color: wcagcolor.$btn-warning-color;
+        border-color: base.$monet-sunset-orange-2;
+
+        &:hover:not(.btn-disabled) {
+            background-color: color.adjust(base.$monet-sunset-orange-2, $lightness: -10%);
+            border-color: color.adjust(base.$monet-sunset-orange-2, $lightness: -10%);
+        }
+
+        &:active:not(.btn-disabled) {
+            background-color: color.adjust(base.$monet-sunset-orange-2, $lightness: -15%);
+            border-color: color.adjust(base.$monet-sunset-orange-2, $lightness: -15%);
+        }
+    }
+
+    // Info
+    &-info {
+        background-color: base.$monet-mist-white-1;
+        color: wcagcolor.$btn-info-color;
+        border-color: base.$monet-mist-white-1;
+
+        &:hover:not(.btn-disabled) {
+            background-color: color.adjust(base.$monet-mist-white-1, $lightness: -10%);
+            border-color: color.adjust(base.$monet-mist-white-1, $lightness: -10%);
+        }
+
+        &:active:not(.btn-disabled) {
+            background-color: color.adjust(base.$monet-mist-white-1, $lightness: -15%);
+            border-color: color.adjust(base.$monet-mist-white-1, $lightness: -15%);
+        }
+    }
+
+    // Sizes
+    &-small {
+        padding: base.$spacing-xs base.$spacing-sm;
+        font-size: base.$font-size-sm;
+        min-height: 32px;
+    }
+
+    &-medium {
+        padding: base.$spacing-sm base.$spacing-md;
+        font-size: base.$font-size-md;
+        min-height: 40px;
+    }
+
+    &-large {
+        padding: base.$spacing-md base.$spacing-lg;
+        font-size: base.$font-size-lg;
+        min-height: 48px;
+    }
+}
