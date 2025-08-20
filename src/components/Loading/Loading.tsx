@@ -28,7 +28,7 @@ function Loading({
                         </div>
                     )}
                     {LoadingType === 'circle' && (
-                        <div className="circle-spinner" style={{ borderColor: colorArray[0] }}></div>
+                        <div className="circle-spinner"></div>
                     )}
                     {LoadingType === 'spin' && (
                         <div className="spin-spinner"></div>

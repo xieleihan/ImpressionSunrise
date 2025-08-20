@@ -48,7 +48,7 @@ Default.args = {
 export const Circle: Story = (args: LoadingProps) => <Loading {...args} />;
 Circle.args = {
     LoadingType: 'circle',
-    size: 60,
+    size: 50,
     colorArray: ['#7aa9e9'],
     tip: 'Loading circle...',
 };
@@ -57,6 +57,6 @@ Circle.args = {
 export const Spin: Story = (args: LoadingProps) => <Loading {...args} />;
 Spin.args = {
     LoadingType: 'spin',
-    size: 40,
+    size: 50,
     tip: 'Loading spin...',
 };

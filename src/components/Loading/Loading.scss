@@ -69,7 +69,7 @@
             height: 100%;
             aspect-ratio: 1/1;
             border: 4px solid transparent;
-            border-top-color: currentColor;
+            border-top-color: base.$monet-sky-blue-3;
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
