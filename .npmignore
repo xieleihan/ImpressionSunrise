@@ -1,0 +1,10 @@
+src/
+node_modules/
+.git/
+.storybook/
+.github/
+.gitignore
+README.md
+vite.config.ts
+tsconfig.json
+.eslintrc.cjs

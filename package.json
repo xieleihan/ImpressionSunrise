@@ -1,18 +1,34 @@
 {
   "name": "impressionsunrise",
-  "private": true,
   "version": "0.0.1",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xieleihan/ImpressionSunrise.git"
+  },
+  "main": "./dist/impression-sunrise.umd.js",
+  "module": "./dist/impression-sunrise.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/impression-sunrise.es.js",
+      "require": "./dist/impression-sunrise.umd.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "path": "^0.12.7",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },
