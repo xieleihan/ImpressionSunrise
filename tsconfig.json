@@ -6,5 +6,9 @@
   ],
   "compilerOptions":{
     "types": ["node"]
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "vite.config.ts",
+  ],
 }

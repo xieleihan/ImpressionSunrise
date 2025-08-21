@@ -11,9 +11,9 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/impression-sunrise.es.js",
-      "require": "./dist/impression-sunrise.umd.js",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/impression-sunrise.umd.js"
     }
   },
   "files": [
@@ -30,7 +30,8 @@
   },
   "dependencies": {
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "terser": "^5.43.1"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.1.0",

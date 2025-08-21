@@ -8,7 +8,7 @@ import './Waterfall.scss';
  * @param poster 视频封面（如果是视频）
  * @param alt 图片或视频的描述
  */
-interface MediaItem {
+export interface MediaItem {
     src: string; // 媒体资源链接
     type: 'image' | 'video'; // 媒体类型
     poster?: string; // 视频封面
