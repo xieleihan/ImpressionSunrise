@@ -18,7 +18,7 @@ function Loading({
 ) {
     return (
         <>
-            <div >
+            <div className='loading-container'>
                 <div className={`loading ${LoadingType} ${className}`} style={{ width: `${size}px`, height: `${size}px` }}>
                     {LoadingType === 'default' && (
                         <div className="default-spinner">
