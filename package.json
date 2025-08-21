@@ -1,6 +1,6 @@
 {
   "name": "impressionsunrise",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "type": "module",
   "repository": {
     "type": "git",
@@ -14,7 +14,10 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/impression-sunrise.es.js",
       "require": "./dist/impression-sunrise.umd.js"
-    }
+    },
+    "./css": "./dist/impressionsunrise.css",
+    "./style.css": "./dist/impressionsunrise.css",
+    "./dist/impressionsunrise.css": "./dist/impressionsunrise.css"
   },
   "files": [
     "dist"
