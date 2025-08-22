@@ -1,0 +1,417 @@
+@use '../../base.scss' as base;
+@use 'sass:color' as sass-color;
+
+// ============ Layout 主容器 ============
+.impression-layout {
+    display: flex;
+    flex: auto;
+    flex-direction: column;
+    min-height: 0;
+    background: base.$monet-mist-white-1;
+
+    &,
+    * {
+        box-sizing: border-box;
+    }
+
+    &-has-sider {
+        flex-direction: row;
+
+        >.impression-layout {
+            flex-direction: column;
+            flex: auto;
+            min-width: 0;
+        }
+    }
+}
+
+// ============ Header ============
+.impression-layout-header {
+    position: relative;
+    top: 0;
+    z-index: 10;
+    max-width: 100%;
+    background: base.$monet-sky-blue-3;
+    color: white;
+    line-height: 64px;
+    height: 64px;
+    padding: 0 base.$spacing-lg;
+    display: flex;
+    align-items: center;
+    font-family: base.$font-family-base;
+    font-size: base.$font-size-md;
+    box-shadow: base.$box-shadow-sm;
+    transition: all 0.2s ease;
+
+    // 响应式设计
+    @media (max-width: 768px) {
+        height: 56px;
+        line-height: 56px;
+        padding: 0 base.$spacing-md;
+        font-size: base.$font-size-sm;
+    }
+
+    @media (max-width: 480px) {
+        height: 48px;
+        line-height: 48px;
+        padding: 0 base.$spacing-sm;
+    }
+
+    // 暗色主题支持
+    @media (prefers-color-scheme: dark) {
+        background: base.$monet-deep-water-1;
+        color: base.$monet-mist-white-1;
+    }
+}
+
+// ============ Footer ============
+.impression-layout-footer {
+    position: relative;
+    bottom: 0;
+    z-index: 10;
+    max-width: 100%;
+    background: base.$monet-cloud-gray-2;
+    color: base.$monet-ash-grey-6;
+    line-height: 48px;
+    min-height: 48px;
+    padding: base.$spacing-sm base.$spacing-lg;
+    display: flex;
+    align-items: center;
+    font-family: base.$font-family-base;
+    font-size: base.$font-size-sm;
+    border-top: 1px solid base.$monet-cloud-gray-1;
+    transition: all 0.2s ease;
+
+    // 响应式设计
+    @media (max-width: 768px) {
+        padding: base.$spacing-sm base.$spacing-md;
+        font-size: 12px;
+    }
+
+    @media (max-width: 480px) {
+        padding: base.$spacing-xs base.$spacing-sm;
+        line-height: 40px;
+        min-height: 40px;
+    }
+
+    // 暗色主题支持
+    @media (prefers-color-scheme: dark) {
+        background: base.$monet-deep-water-2;
+        color: base.$monet-mist-white-2;
+        border-top-color: base.$monet-deep-water-1;
+    }
+}
+
+// ============ Content ============
+.impression-layout-content {
+    position: relative;
+    flex: auto;
+    min-height: 0;
+    padding: base.$spacing-lg;
+    background: base.$monet-mist-white-2;
+    color: base.$monet-ash-grey-7;
+    font-family: base.$font-family-base;
+    font-size: base.$font-size-md;
+    line-height: 1.5714285714;
+    overflow: auto;
+
+    // 响应式设计
+    @media (max-width: 768px) {
+        padding: base.$spacing-md;
+        font-size: base.$font-size-sm;
+    }
+
+    @media (max-width: 480px) {
+        padding: base.$spacing-sm;
+    }
+
+    // 暗色主题支持
+    @media (prefers-color-scheme: dark) {
+        background: base.$monet-ash-grey-8;
+        color: base.$monet-mist-white-2;
+    }
+}
+
+// ============ Sider ============
+.impression-layout-sider {
+    position: relative;
+    background: base.$monet-deep-water-1;
+    min-height: 100vh;
+    transition: all 0.2s ease;
+    box-shadow: base.$box-shadow-md;
+
+    &-children {
+        height: 100%;
+        margin-top: -0.1px;
+        padding-top: 0.1px;
+        overflow: auto;
+    }
+
+    // 主题样式
+    &-light {
+        background: base.$monet-mist-white-1;
+        box-shadow: inset -1px 0 0 base.$monet-cloud-gray-1;
+
+        .impression-layout-sider-trigger {
+            background: base.$monet-mist-white-1;
+            color: base.$monet-ash-grey-6;
+            border-top: 1px solid base.$monet-cloud-gray-1;
+
+            &:hover {
+                background: base.$monet-cloud-gray-2;
+                color: base.$monet-ash-grey-7;
+            }
+        }
+    }
+
+    &-dark {
+        background: base.$monet-deep-water-1;
+        color: base.$monet-mist-white-2;
+
+        .impression-layout-sider-trigger {
+            background: base.$monet-deep-water-2;
+            color: base.$monet-mist-white-2;
+            border-top: 1px solid sass-color.adjust(base.$monet-deep-water-1, $alpha: -0.2);
+
+            &:hover {
+                background: base.$monet-sky-blue-3;
+                color: white;
+            }
+        }
+    }
+
+    // 位置样式
+    &-left {
+        order: -1;
+    }
+
+    &-right {
+        order: 1;
+    }
+
+    // 收起状态
+    &-collapsed {
+        .impression-layout-sider-trigger-icon {
+            &.reverse {
+                transform: rotate(180deg);
+            }
+
+            &:not(.reverse) {
+                transform: rotate(0deg);
+            }
+        }
+    }
+
+    &:not(.impression-layout-sider-collapsed) {
+        .impression-layout-sider-trigger-icon {
+            &.reverse {
+                transform: rotate(0deg);
+            }
+
+            &:not(.reverse) {
+                transform: rotate(180deg);
+            }
+        }
+    }
+
+    // 响应式断点样式
+    &-below {
+        .impression-layout-sider-trigger {
+            display: none;
+        }
+    }
+
+    // 触发器样式
+    &-trigger {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 48px;
+        line-height: 48px;
+        text-align: center;
+        cursor: pointer;
+        user-select: none;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: base.$font-size-md;
+
+        &:focus {
+            outline: 2px solid base.$monet-sky-blue-3;
+            outline-offset: -2px;
+        }
+
+        &:active {
+            background: sass-color.adjust(base.$monet-deep-water-2, $alpha: -0.1);
+        }
+    }
+
+    &-trigger-icon {
+        display: inline-block;
+        transition: transform 0.2s ease;
+        font-size: 16px;
+        line-height: 1;
+
+        &.collapsed {
+            transform: rotate(180deg);
+        }
+    }
+
+    // 响应式设计
+    @media (max-width: 768px) {
+        min-height: auto;
+
+        &-trigger {
+            height: 40px;
+            line-height: 40px;
+            font-size: base.$font-size-sm;
+        }
+    }
+
+    // 暗色主题增强
+    @media (prefers-color-scheme: dark) {
+        &-light {
+            background: base.$monet-ash-grey-8;
+            box-shadow: inset -1px 0 0 base.$monet-ash-grey-6;
+
+            .impression-layout-sider-trigger {
+                background: base.$monet-ash-grey-7;
+                color: base.$monet-mist-white-2;
+                border-top-color: base.$monet-ash-grey-6;
+
+                &:hover {
+                    background: base.$monet-ash-grey-6;
+                }
+            }
+        }
+    }
+}
+
+// ============ 高级布局组合样式 ============
+
+// 顶部导航布局
+.impression-layout-header+.impression-layout {
+    margin-top: 0;
+}
+
+// 固定头部布局
+.impression-layout-header.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.impression-layout-header.fixed+.impression-layout {
+    margin-top: 64px;
+
+    @media (max-width: 768px) {
+        margin-top: 56px;
+    }
+
+    @media (max-width: 480px) {
+        margin-top: 48px;
+    }
+}
+
+// 固定侧边栏布局
+.impression-layout-sider.fixed {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    z-index: 999;
+
+    &.impression-layout-sider-left {
+        left: 0;
+    }
+
+    &.impression-layout-sider-right {
+        right: 0;
+    }
+}
+
+// 无缝内容区域
+.impression-layout-content.seamless {
+    padding: 0;
+}
+
+// 滚动容器
+.impression-layout-content.scrollable {
+    overflow-y: auto;
+    max-height: calc(100vh - 112px); // 减去header和footer高度
+}
+
+// ============ 动画效果 ============
+
+@keyframes sider-slide-in {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes sider-slide-out {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+}
+
+.impression-layout-sider {
+    animation: sider-slide-in 0.3s ease-out;
+}
+
+.impression-layout-sider.sliding-out {
+    animation: sider-slide-out 0.3s ease-out;
+}
+
+// ============ 可访问性增强 ============
+
+.impression-layout-sider-trigger:focus-visible {
+    outline: 2px solid base.$monet-sky-blue-3;
+    outline-offset: -2px;
+}
+
+// 减少动画的用户偏好
+@media (prefers-reduced-motion: reduce) {
+
+    .impression-layout-sider,
+    .impression-layout-sider-trigger,
+    .impression-layout-sider-trigger-icon {
+        transition: none;
+        animation: none;
+    }
+}
+
+// ============ 打印样式 ============
+@media print {
+    .impression-layout-sider {
+        display: none;
+    }
+
+    .impression-layout-content {
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+    }
+
+    .impression-layout-header,
+    .impression-layout-footer {
+        background: white;
+        color: black;
+        box-shadow: none;
+    }
+}
