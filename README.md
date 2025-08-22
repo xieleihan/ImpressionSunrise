@@ -22,11 +22,13 @@ import "impressionsunrise/css";
 function App() {
   return (
     <div>
-      <Button variant="primary" size="medium">
+      <Button type="primary" size="middle">
         点击我
       </Button>
 
       <Loading size={40} tip="加载中..." />
+
+      <Input placeholder="请输入内容" allowClear showCount maxLength={100} />
 
       <Waterfall
         columns={3}
@@ -51,15 +53,26 @@ function App() {
 ```tsx
 import type {
   ButtonProps,
+  InputProps,
+  InputRef,
   LoadingProps,
   WaterfallProps,
   MediaItem,
 } from "impressionsunrise";
 
 const myButtonProps: ButtonProps = {
-  variant: "primary",
+  type: "primary",
   size: "large",
   children: "My Button",
+};
+
+const myInputProps: InputProps = {
+  size: "large",
+  status: "error",
+  placeholder: "请输入内容",
+  allowClear: true,
+  showCount: true,
+  maxLength: 100,
 };
 ```
 
@@ -68,8 +81,17 @@ const myButtonProps: ButtonProps = {
 ### Button 按钮
 
 - **Props**: `ButtonProps`
-- **变体**: `primary` | `secondary` | `success` | `danger` | `warning` | `info`
-- **大小**: `small` | `medium` | `large`
+- **类型**: `default` | `primary` | `dashed` | `text` | `link`
+- **大小**: `small` | `middle` | `large`
+- **形状**: `default` | `circle` | `round`
+- **特性**: 支持危险模式、幽灵模式、加载状态、禁用状态、块级布局
+
+### Input 输入框
+
+- **Props**: `InputProps`
+- **大小**: `small` | `middle` | `large`
+- **状态**: `error` | `warning`
+- **功能**: 前缀后缀、清除、字数统计、前置后置标签
 
 ### Loading 加载器
 

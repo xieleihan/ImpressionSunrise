@@ -1,148 +1,415 @@
-@use '../../base' as base;
-@use '../../styles/color' as wcagcolor;
-@use 'sass:color';
+@use 'sass:color' as sass-color;
+@use '../../base.scss' as base;
 
 .btn {
+    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid transparent;
-    border-radius: base.$border-radius-md;
-    cursor: pointer;
-    font-weight: 500;
-    transition: all 0.2s ease-in-out;
-    text-decoration: none;
-    user-select: none;
+    gap: base.$spacing-xs;
+    padding: base.$spacing-xs base.$spacing-sm;
+    font-family: base.$font-family-base;
+    font-size: base.$font-size-sm;
+    font-weight: 400;
+    line-height: 1.5715;
+    text-align: center;
     white-space: nowrap;
+    vertical-align: middle;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: base.$border-radius-base;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+    user-select: none;
+    text-decoration: none;
+    min-height: 32px;
+    box-sizing: border-box;
 
-    &:focus {
-        outline: none;
-        box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+    &:focus,
+    &:focus-visible {
+        outline: 2px solid base.$monet-sky-blue-3;
+        outline-offset: 2px;
     }
 
-    &-disabled {
-        opacity: 0.6;
+    &:active {
+        outline: none;
+    }
+
+    // Disabled state
+    &-disabled,
+    &[disabled] {
+        color: base.$monet-ash-grey-5 !important;
+        background: base.$monet-ash-grey-1 !important;
+        border-color: base.$monet-ash-grey-2 !important;
         cursor: not-allowed;
+        box-shadow: none;
+
+        &:hover,
+        &:focus,
+        &:active {
+            color: base.$monet-ash-grey-5 !important;
+            background: base.$monet-ash-grey-1 !important;
+            border-color: base.$monet-ash-grey-2 !important;
+        }
+    }
+
+    // Loading state
+    &-loading {
+        position: relative;
+        pointer-events: none;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 14px;
+            height: 14px;
+            margin: -7px 0 0 -7px;
+            border: 2px solid transparent;
+            border-top: 2px solid currentColor;
+            border-radius: 50%;
+            animation: btn-loading-spin 0.8s linear infinite;
+        }
+
+        .btn-content {
+            opacity: 0;
+        }
+    }
+
+    &-loading-icon {
+        display: inline-block;
+        animation: btn-loading-spin 0.8s linear infinite;
+    }
+
+    @keyframes btn-loading-spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    // Block button
+    &-block {
+        width: 100%;
+        display: flex;
+    }
+
+    // Icon only button
+    &-icon-only {
+        padding: base.$spacing-xs;
+        width: 32px;
+        height: 32px;
+
+        &.btn-small {
+            width: 24px;
+            height: 24px;
+        }
+
+        &.btn-large {
+            width: 40px;
+            height: 40px;
+        }
+    }
+
+    // Button types
+    // Default
+    &-default {
+        background: base.$monet-mist-white-1;
+        border-color: base.$monet-ash-grey-3;
+        color: base.$monet-ash-grey-7;
+
+        &:hover:not(.btn-disabled) {
+            color: base.$monet-sky-blue-3;
+            border-color: base.$monet-sky-blue-3;
+        }
+
+        &:active:not(.btn-disabled) {
+            color: base.$monet-sky-blue-4;
+            border-color: base.$monet-sky-blue-4;
+        }
+
+        &:focus:not(.btn-disabled) {
+            color: base.$monet-sky-blue-3;
+            border-color: base.$monet-sky-blue-3;
+        }
     }
 
     // Primary
     &-primary {
-        background-color: base.$monet-sky-blue-3;
-        color: wcagcolor.$btn-primary-color;
+        background: base.$monet-sky-blue-3;
         border-color: base.$monet-sky-blue-3;
+        color: base.$monet-mist-white-1;
 
         &:hover:not(.btn-disabled) {
-            background-color: color.adjust(base.$monet-sky-blue-3, $lightness: -10%);
-            border-color: color.adjust(base.$monet-sky-blue-3, $lightness: -10%);
+            background: base.$monet-sky-blue-4;
+            border-color: base.$monet-sky-blue-4;
         }
 
         &:active:not(.btn-disabled) {
-            background-color: color.adjust(base.$monet-sky-blue-3, $lightness: -15%);
-            border-color: color.adjust(base.$monet-sky-blue-3, $lightness: -15%);
+            background: base.$monet-sky-blue-5;
+            border-color: base.$monet-sky-blue-5;
         }
     }
 
-    // Secondary
-    &-secondary {
-        background-color: base.$monet-wisteria-purple-1;
-        color: wcagcolor.$btn-secondary-color;
-        border-color: base.$monet-wisteria-purple-1;
+    // Dashed
+    &-dashed {
+        background: base.$monet-mist-white-1;
+        border-color: base.$monet-ash-grey-3;
+        border-style: dashed;
+        color: base.$monet-ash-grey-7;
 
         &:hover:not(.btn-disabled) {
-            background-color: color.adjust(base.$monet-wisteria-purple-1, $lightness: -10%);
-            border-color: color.adjust(base.$monet-wisteria-purple-1, $lightness: -10%);
+            color: base.$monet-sky-blue-3;
+            border-color: base.$monet-sky-blue-3;
         }
 
         &:active:not(.btn-disabled) {
-            background-color: color.adjust(base.$monet-wisteria-purple-1, $lightness: -15%);
-            border-color: color.adjust(base.$monet-wisteria-purple-1, $lightness: -15%);
+            color: base.$monet-sky-blue-4;
+            border-color: base.$monet-sky-blue-4;
         }
     }
 
-    // Success
-    &-success {
-        background-color: base.$monet-grass-green-3;
-        color: wcagcolor.$btn-success-color;
-        border-color: base.$monet-grass-green-3;
+    // Text
+    &-text {
+        background: transparent;
+        border-color: transparent;
+        color: base.$monet-ash-grey-7;
+        box-shadow: none;
 
         &:hover:not(.btn-disabled) {
-            background-color: color.adjust(base.$monet-grass-green-3, $lightness: -10%);
-            border-color: color.adjust(base.$monet-grass-green-3, $lightness: -10%);
+            color: base.$monet-sky-blue-3;
+            background: sass-color.adjust(base.$monet-sky-blue-3, $alpha: -0.9);
         }
 
         &:active:not(.btn-disabled) {
-            background-color: color.adjust(base.$monet-grass-green-3, $lightness: -15%);
-            border-color: color.adjust(base.$monet-grass-green-3, $lightness: -15%);
+            color: base.$monet-sky-blue-4;
+            background: sass-color.adjust(base.$monet-sky-blue-4, $alpha: -0.85);
+        }
+
+        &:focus:not(.btn-disabled) {
+            color: base.$monet-sky-blue-3;
+            background: sass-color.adjust(base.$monet-sky-blue-3, $alpha: -0.9);
         }
     }
 
-    // Danger
-    &-danger {
-        background-color: base.$monet-flower-red-1;
-        color: wcagcolor.$btn-danger-color;
-        border-color: base.$monet-flower-red-1;
+    // Link
+    &-link {
+        background: transparent;
+        border-color: transparent;
+        color: base.$monet-sky-blue-3;
+        box-shadow: none;
 
         &:hover:not(.btn-disabled) {
-            background-color: color.adjust(base.$monet-flower-red-1, $lightness: -10%);
-            border-color: color.adjust(base.$monet-flower-red-1, $lightness: -10%);
+            color: base.$monet-sky-blue-4;
+            background: transparent;
         }
 
         &:active:not(.btn-disabled) {
-            background-color: color.adjust(base.$monet-flower-red-1, $lightness: -15%);
-            border-color: color.adjust(base.$monet-flower-red-1, $lightness: -15%);
+            color: base.$monet-sky-blue-5;
+        }
+
+        &:focus:not(.btn-disabled) {
+            color: base.$monet-sky-blue-4;
         }
     }
 
-    // Warning
-    &-warning {
-        background-color: base.$monet-sunset-orange-2;
-        color: wcagcolor.$btn-warning-color;
-        border-color: base.$monet-sunset-orange-2;
-
-        &:hover:not(.btn-disabled) {
-            background-color: color.adjust(base.$monet-sunset-orange-2, $lightness: -10%);
-            border-color: color.adjust(base.$monet-sunset-orange-2, $lightness: -10%);
-        }
-
-        &:active:not(.btn-disabled) {
-            background-color: color.adjust(base.$monet-sunset-orange-2, $lightness: -15%);
-            border-color: color.adjust(base.$monet-sunset-orange-2, $lightness: -15%);
-        }
-    }
-
-    // Info
-    &-info {
-        background-color: base.$monet-mist-white-1;
-        color: wcagcolor.$btn-info-color;
-        border-color: base.$monet-mist-white-1;
-
-        &:hover:not(.btn-disabled) {
-            background-color: color.adjust(base.$monet-mist-white-1, $lightness: -10%);
-            border-color: color.adjust(base.$monet-mist-white-1, $lightness: -10%);
-        }
-
-        &:active:not(.btn-disabled) {
-            background-color: color.adjust(base.$monet-mist-white-1, $lightness: -15%);
-            border-color: color.adjust(base.$monet-mist-white-1, $lightness: -15%);
-        }
-    }
-
-    // Sizes
+    // Button sizes
     &-small {
+        padding: 0 base.$spacing-xs;
+        font-size: base.$font-size-xs;
+        min-height: 24px;
+    }
+
+    &-middle {
         padding: base.$spacing-xs base.$spacing-sm;
         font-size: base.$font-size-sm;
         min-height: 32px;
     }
 
-    &-medium {
+    &-large {
         padding: base.$spacing-sm base.$spacing-md;
         font-size: base.$font-size-md;
         min-height: 40px;
     }
 
-    &-large {
-        padding: base.$spacing-md base.$spacing-lg;
-        font-size: base.$font-size-lg;
-        min-height: 48px;
+    // Button shapes
+    &-circle {
+        border-radius: 50%;
+    }
+
+    &-round {
+        border-radius: base.$border-radius-lg;
+    }
+
+    // Ghost button variants
+    &-ghost {
+        background: transparent;
+
+        &.btn-primary {
+            color: base.$monet-sky-blue-3;
+            border-color: base.$monet-sky-blue-3;
+
+            &:hover:not(.btn-disabled) {
+                color: base.$monet-sky-blue-4;
+                border-color: base.$monet-sky-blue-4;
+                background: sass-color.adjust(base.$monet-sky-blue-3, $alpha: -0.9);
+            }
+
+            &:active:not(.btn-disabled) {
+                color: base.$monet-sky-blue-5;
+                border-color: base.$monet-sky-blue-5;
+                background: sass-color.adjust(base.$monet-sky-blue-4, $alpha: -0.85);
+            }
+        }
+
+        &.btn-default {
+            color: base.$monet-ash-grey-7;
+            border-color: base.$monet-ash-grey-3;
+
+            &:hover:not(.btn-disabled) {
+                color: base.$monet-sky-blue-3;
+                border-color: base.$monet-sky-blue-3;
+                background: sass-color.adjust(base.$monet-sky-blue-3, $alpha: -0.9);
+            }
+        }
+    }
+
+    // Danger variant for different button types
+    &.btn-danger-variant {
+        &.btn-primary {
+            background: base.$monet-cherry-red-3;
+            border-color: base.$monet-cherry-red-3;
+
+            &:hover:not(.btn-disabled) {
+                background: base.$monet-cherry-red-4;
+                border-color: base.$monet-cherry-red-4;
+            }
+
+            &:active:not(.btn-disabled) {
+                background: base.$monet-cherry-red-5;
+                border-color: base.$monet-cherry-red-5;
+            }
+        }
+
+        &.btn-default {
+            color: base.$monet-cherry-red-3;
+            border-color: base.$monet-cherry-red-3;
+
+            &:hover:not(.btn-disabled) {
+                color: base.$monet-cherry-red-4;
+                border-color: base.$monet-cherry-red-4;
+                background: sass-color.adjust(base.$monet-cherry-red-3, $alpha: -0.9);
+            }
+
+            &:active:not(.btn-disabled) {
+                color: base.$monet-cherry-red-5;
+                border-color: base.$monet-cherry-red-5;
+                background: sass-color.adjust(base.$monet-cherry-red-4, $alpha: -0.85);
+            }
+        }
+
+        &.btn-text {
+            color: base.$monet-cherry-red-3;
+
+            &:hover:not(.btn-disabled) {
+                color: base.$monet-cherry-red-4;
+                background: sass-color.adjust(base.$monet-cherry-red-3, $alpha: -0.9);
+            }
+
+            &:active:not(.btn-disabled) {
+                color: base.$monet-cherry-red-5;
+                background: sass-color.adjust(base.$monet-cherry-red-4, $alpha: -0.85);
+            }
+        }
+
+        &.btn-link {
+            color: base.$monet-cherry-red-3;
+
+            &:hover:not(.btn-disabled) {
+                color: base.$monet-cherry-red-4;
+            }
+
+            &:active:not(.btn-disabled) {
+                color: base.$monet-cherry-red-5;
+            }
+        }
+
+        &.btn-ghost {
+            color: base.$monet-cherry-red-3;
+            border-color: base.$monet-cherry-red-3;
+
+            &:hover:not(.btn-disabled) {
+                color: base.$monet-cherry-red-4;
+                border-color: base.$monet-cherry-red-4;
+                background: sass-color.adjust(base.$monet-cherry-red-3, $alpha: -0.9);
+            }
+
+            &:active:not(.btn-disabled) {
+                color: base.$monet-cherry-red-5;
+                border-color: base.$monet-cherry-red-5;
+                background: sass-color.adjust(base.$monet-cherry-red-4, $alpha: -0.85);
+            }
+        }
+    }
+
+    // 响应式调整
+    @media (max-width: 768px) {
+        &-large {
+            padding: base.$spacing-xs base.$spacing-sm;
+            font-size: base.$font-size-sm;
+            min-height: 36px;
+        }
+
+        &-middle {
+            padding: 4px base.$spacing-xs;
+            font-size: base.$font-size-xs;
+            min-height: 28px;
+        }
+
+        &-small {
+            padding: 2px 6px;
+            font-size: 12px;
+            min-height: 22px;
+        }
+    }
+}
+
+// 暗色主题支持
+@media (prefers-color-scheme: dark) {
+    .btn {
+        &-default {
+            background: base.$monet-deep-water-1;
+            border-color: base.$monet-deep-water-2;
+            color: base.$monet-mist-white-1;
+
+            &:hover:not(.btn-disabled) {
+                color: base.$monet-sky-blue-3;
+                border-color: base.$monet-sky-blue-3;
+            }
+        }
+
+        &-text {
+            color: base.$monet-mist-white-1;
+
+            &:hover:not(.btn-disabled) {
+                background: sass-color.adjust(base.$monet-sky-blue-3, $alpha: -0.88);
+            }
+        }
+
+        &-dashed {
+            background: base.$monet-deep-water-1;
+            border-color: base.$monet-deep-water-2;
+            color: base.$monet-mist-white-1;
+
+            &:hover:not(.btn-disabled) {
+                color: base.$monet-sky-blue-3;
+                border-color: base.$monet-sky-blue-3;
+            }
+        }
     }
 }

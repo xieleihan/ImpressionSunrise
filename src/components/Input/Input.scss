@@ -1,0 +1,363 @@
+@use '../../base' as base;
+@use '../../styles/color' as color;
+@use 'sass:color' as sass-color;
+
+// Input 组件专用变量
+$input-height-base: 32px;
+$input-height-lg: 40px;
+$input-height-sm: 24px;
+$input-padding-horizontal: base.$spacing-sm + 3px; // 11px
+$input-padding-horizontal-sm: 7px;
+$input-padding-horizontal-lg: base.$spacing-sm + 3px;
+$input-padding-vertical-base: 4px;
+$input-padding-vertical-sm: 0px;
+$input-padding-vertical-lg: 6.5px;
+
+// 基础输入框包装器样式
+.input-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    min-width: 0;
+    padding: $input-padding-vertical-base $input-padding-horizontal;
+    color: base.$monet-deep-water-1;
+    font-size: base.$font-size-md;
+    line-height: 1.5714285714285714;
+    background-color: base.$monet-mist-white-1;
+    background-image: none;
+    border: 1px solid base.$monet-cloud-gray-1;
+    border-radius: base.$border-radius-lg;
+    outline: none;
+    transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+    box-sizing: border-box;
+
+    &:hover:not(.input-wrapper-disabled) {
+        border-color: base.$monet-sky-blue-3;
+        border-inline-end-width: 1px;
+    }
+
+    &-focused {
+        border-color: base.$monet-sky-blue-3;
+        box-shadow: 0 0 0 2px sass-color.adjust(base.$monet-sky-blue-3, $alpha: -0.88);
+        border-inline-end-width: 1px;
+        outline: 0;
+    }
+
+    &-disabled {
+        color: sass-color.adjust(base.$monet-deep-water-1, $alpha: -0.75);
+        background-color: sass-color.adjust(base.$monet-cloud-gray-1, $alpha: -0.94);
+        border-color: base.$monet-cloud-gray-1;
+        cursor: not-allowed;
+
+        &:hover {
+            border-color: base.$monet-cloud-gray-1;
+        }
+
+        .input {
+            cursor: not-allowed;
+            color: inherit;
+        }
+    }
+
+    // 无边框模式
+    &:not(.input-wrapper-bordered) {
+        border: none;
+        background-color: transparent;
+
+        &:focus {
+            box-shadow: none;
+        }
+
+        &:hover:not(.input-wrapper-disabled) {
+            background-color: sass-color.adjust(base.$monet-mist-white-1, $alpha: -0.96);
+        }
+    }
+
+    &:not(.input-wrapper-bordered).input-wrapper-focused {
+        box-shadow: none;
+    }
+
+    // 错误状态
+    &-error {
+        border-color: base.$monet-flower-red-1;
+
+        &:hover:not(.input-wrapper-disabled) {
+            border-color: base.$monet-flower-red-1;
+        }
+
+        &.input-wrapper-focused {
+            border-color: base.$monet-flower-red-1;
+            box-shadow: 0 0 0 2px sass-color.adjust(base.$monet-flower-red-1, $alpha: -0.88);
+        }
+    }
+
+    // 警告状态
+    &-warning {
+        border-color: base.$monet-sunset-orange-1;
+
+        &:hover:not(.input-wrapper-disabled) {
+            border-color: base.$monet-sunset-orange-1;
+        }
+
+        &.input-wrapper-focused {
+            border-color: base.$monet-sunset-orange-1;
+            box-shadow: 0 0 0 2px sass-color.adjust(base.$monet-sunset-orange-1, $alpha: -0.88);
+        }
+    }
+
+    // 大小变体
+    &-small {
+        padding: $input-padding-vertical-sm $input-padding-horizontal-sm;
+        font-size: base.$font-size-sm;
+        border-radius: base.$border-radius-md;
+
+        .input {
+            height: $input-height-sm;
+        }
+    }
+
+    &-middle {
+        padding: $input-padding-vertical-base $input-padding-horizontal;
+        font-size: base.$font-size-md;
+
+        .input {
+            height: $input-height-base - 2 * $input-padding-vertical-base - 2px; // 减去padding和border
+        }
+    }
+
+    &-large {
+        padding: $input-padding-vertical-lg $input-padding-horizontal-lg;
+        font-size: base.$font-size-lg;
+        border-radius: base.$border-radius-lg;
+
+        .input {
+            height: $input-height-lg - 2 * $input-padding-vertical-lg - 2px; // 减去padding和border
+        }
+    }
+}
+
+// 实际输入框元素
+.input {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    min-width: 0;
+    padding: 0;
+    color: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    background-color: transparent;
+    border: none;
+    outline: none;
+
+    &::placeholder {
+        color: sass-color.adjust(base.$monet-deep-water-1, $alpha: -0.75);
+        user-select: none;
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+    }
+
+    // 移除浏览器默认样式
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    &[type='number'] {
+        -moz-appearance: textfield;
+        appearance: textfield;
+    }
+}
+
+// 前缀后缀样式
+.input-prefix,
+.input-suffix {
+    display: flex;
+    flex: none;
+    align-items: center;
+    color: sass-color.adjust(base.$monet-deep-water-1, $alpha: -0.75);
+}
+
+.input-prefix {
+    margin-inline-end: base.$spacing-xs;
+}
+
+.input-suffix {
+    margin-inline-start: base.$spacing-xs;
+}
+
+// 清除按钮样式
+.input-clear {
+    cursor: pointer;
+    color: sass-color.adjust(base.$monet-deep-water-1, $alpha: -0.75);
+    transition: color 0.2s;
+
+    &:hover {
+        color: sass-color.adjust(base.$monet-deep-water-1, $alpha: -0.55);
+    }
+
+    svg {
+        display: block;
+    }
+}
+
+// 输入组样式
+.input-group {
+    position: relative;
+    display: table;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+
+    &-wrapper {
+        display: inline-block;
+        width: 100%;
+        text-align: start;
+        vertical-align: top;
+
+        .input-wrapper {
+            display: table-cell;
+            border-radius: 0;
+
+            &:not(:first-child):not(:last-child) {
+                border-radius: 0;
+            }
+
+            &:first-child {
+                border-start-end-radius: 0;
+                border-end-end-radius: 0;
+            }
+
+            &:last-child {
+                border-start-start-radius: 0;
+                border-end-start-radius: 0;
+            }
+        }
+    }
+}
+
+// 前置后置标签样式
+.input-group-addon {
+    position: relative;
+    display: table-cell;
+    padding: 0 $input-padding-horizontal;
+    color: base.$monet-deep-water-1;
+    font-weight: normal;
+    font-size: base.$font-size-md;
+    text-align: center;
+    background-color: sass-color.adjust(base.$monet-mist-white-1, $alpha: -0.98);
+    border: 1px solid base.$monet-cloud-gray-1;
+    border-radius: base.$border-radius-lg;
+    transition: all 0.3s;
+    width: 1px;
+    white-space: nowrap;
+    vertical-align: middle;
+
+    &:first-child {
+        border-end-start-radius: base.$border-radius-lg;
+        border-start-start-radius: base.$border-radius-lg;
+        border-inline-end: 0;
+    }
+
+    &:last-child {
+        border-end-end-radius: base.$border-radius-lg;
+        border-start-end-radius: base.$border-radius-lg;
+        border-inline-start: 0;
+    }
+}
+
+// 字数统计样式
+.input-affix-wrapper-with-count {
+    display: inline-block;
+    width: 100%;
+
+    .input-show-count-suffix {
+        color: sass-color.adjust(base.$monet-deep-water-1, $alpha: -0.55);
+        white-space: nowrap;
+        pointer-events: none;
+        user-select: none;
+        font-size: base.$font-size-sm;
+        line-height: 1.5;
+        margin-inline-start: base.$spacing-sm;
+    }
+}
+
+// 有前缀或后缀时的样式调整
+.input-wrapper-affix {
+    .input {
+        position: relative;
+        z-index: 1;
+    }
+}
+
+// 响应式设计
+@media (max-width: 575px) {
+    .input-wrapper {
+        &-small {
+            font-size: base.$font-size-sm;
+        }
+
+        &-middle {
+            font-size: base.$font-size-sm + 1px;
+        }
+
+        &-large {
+            font-size: base.$font-size-md;
+        }
+    }
+
+    .input-group-addon {
+        font-size: base.$font-size-sm;
+    }
+}
+
+// 焦点状态动画
+@keyframes input-focus {
+    0% {
+        box-shadow: 0 0 0 0 sass-color.adjust(base.$monet-sky-blue-3, $alpha: -0.88);
+    }
+
+    100% {
+        box-shadow: 0 0 0 2px sass-color.adjust(base.$monet-sky-blue-3, $alpha: -0.88);
+    }
+}
+
+.input-wrapper-focused {
+    animation: input-focus 0.2s ease-out;
+}
+
+// 暗色主题支持（可选）
+@media (prefers-color-scheme: dark) {
+    .input-wrapper {
+        background-color: base.$monet-deep-water-1;
+        border-color: base.$monet-deep-water-2;
+        color: base.$monet-mist-white-1;
+
+        &:hover:not(.input-wrapper-disabled) {
+            border-color: base.$monet-sky-blue-3;
+        }
+
+        &-disabled {
+            background-color: sass-color.adjust(base.$monet-deep-water-1, $alpha: -0.94);
+            color: sass-color.adjust(base.$monet-mist-white-1, $alpha: -0.75);
+        }
+
+        .input::placeholder {
+            color: sass-color.adjust(base.$monet-mist-white-1, $alpha: -0.75);
+        }
+    }
+
+    .input-group-addon {
+        background-color: sass-color.adjust(base.$monet-deep-water-1, $alpha: -0.98);
+        border-color: base.$monet-deep-water-2;
+        color: base.$monet-mist-white-1;
+    }
+}
